@@ -5,6 +5,10 @@ const Schema = use('Schema')
 
 class ProductSchema extends Schema {
   up () {
+    //discordo que o importante é que funcione... o importante é que seja legivel e entendível depois
+    //esse rapaz certamente não viu nada do  uncle bob
+
+    //mais uma vez, volto depois para resolver essas coisinhas
     this.create('products', (table) => {
       table.increments()
       table.string('name',200)
@@ -27,11 +31,19 @@ class ProductSchema extends Schema {
 
       table.timestamps()
     })
+    this.create('category_product',(table)=>{
+      table.increments()
+      table.integer('product_id').unsigned()
+      table.integer('category_id').unsigned()
+      table.foreign('product_id').references('id').inTable('products').onDelete('cascade')
+      table.foreign('category_id').references('id').inTable('category').onDelete('cascade')
+    })
   }
 
   down () {
-    this.drop('products')
+    this.drop('category_product')
     this.drop('image_product')
+    this.drop('products')
   }
 }
 
