@@ -9,7 +9,7 @@ class ImageSchema extends Schema {
       table.increments()
       table.string('path',255)
       table.integer('size').unsigned()
-      table.sting('original_name')
+      table.string('original_name')
       table.string('extension',10)
       table.timestamps()
     })
