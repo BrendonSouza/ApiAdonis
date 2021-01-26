@@ -15,6 +15,11 @@ class User extends Model {
      * it to the database.
      */
     //
+    //hooks são injeções de código, antes ou depoisi desses dados chegarem no banco de dados
+    /*
+      Nesse caso o hook oculta a senha do usuario no banco de dados. 
+      Os hooks podem ser de closure como esse exemplo abaixo e por referencia.
+    */
     this.addHook('beforeSave', async (userInstance) => {
       if (userInstance.dirty.password) {
         userInstance.password = await Hash.make(userInstance.password)

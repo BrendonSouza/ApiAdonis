@@ -5,6 +5,15 @@ const Model = use('Model')
 
 class Order extends Model {
 
+  static boot() {
+    /*
+      Fazendo desse jeito, Como addHook não está referenciado na classe Order, pegamos o metodo por herança da classe Model
+    */
+    super.boot()
+    this.addHook('afterFind', 'OrderHook.updateValues')
+    this.addHook('afterPaginate', 'OrderHook.updateCollectionValues')
+  }
+
   items() {
     return this.hasMany('App/Models/OrderItem')
   }
